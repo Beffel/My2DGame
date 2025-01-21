@@ -30,7 +30,7 @@ public class ColissionChecker {
                 tileNum2 = gp.tileM.mapTileNum[entityRightCol][entityTopRow];
 
                 if(gp.tileM.tile[tileNum1].colission == true || gp.tileM.tile[tileNum2].colission == true) {
-                    entity.colissionOn = true;
+                    entity.collisionOn = true;
                 }
                 break;
             case "down":
@@ -39,7 +39,7 @@ public class ColissionChecker {
                 tileNum2 = gp.tileM.mapTileNum[entityRightCol][entityBottomRow];
 
                 if(gp.tileM.tile[tileNum1].colission == true || gp.tileM.tile[tileNum2].colission == true) {
-                    entity.colissionOn = true;
+                    entity.collisionOn = true;
                 }
                 break;
             case "left":
@@ -48,7 +48,7 @@ public class ColissionChecker {
                 tileNum2 = gp.tileM.mapTileNum[entityLeftCol][entityBottomRow];
 
                 if(gp.tileM.tile[tileNum1].colission == true || gp.tileM.tile[tileNum2].colission == true) {
-                    entity.colissionOn = true;
+                    entity.collisionOn = true;
                 }
                 break;
             case "right":
@@ -57,7 +57,7 @@ public class ColissionChecker {
                 tileNum2 = gp.tileM.mapTileNum[entityRightCol][entityBottomRow];
 
                 if(gp.tileM.tile[tileNum1].colission == true || gp.tileM.tile[tileNum2].colission == true) {
-                    entity.colissionOn = true;
+                    entity.collisionOn = true;
                 }
                 break;
         }
@@ -88,8 +88,8 @@ public class ColissionChecker {
                 }
 
                 if(entity.solidArea.intersects(gp.obj[i].solidArea)) { // intersects automatically checks if the two rectangles are coliding or not
-                    if(gp.obj[i].colission == true) {
-                        entity.colissionOn = true;
+                    if(gp.obj[i].collision == true) {
+                        entity.collisionOn = true;
                     }
                     if(player == true) {
                         index = i;
@@ -132,7 +132,7 @@ public class ColissionChecker {
 
                 if(entity.solidArea.intersects(target[i].solidArea)) { // intersects automatically checks if the two rectangles are coliding or not
                     if (target[i] != entity) {
-                        entity.colissionOn = true;
+                        entity.collisionOn = true;
                         index = i;
                     }
                 }
@@ -166,7 +166,7 @@ public class ColissionChecker {
             case "right": entity.solidArea.x += entity.speed; break;
         }
         if(entity.solidArea.intersects(gp.player.solidArea)) { // intersects automatically checks if the two rectangles are coliding or not
-            entity.colissionOn = true;
+            entity.collisionOn = true;
             contactPlayer = true;
         }
 
