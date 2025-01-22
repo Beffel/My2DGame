@@ -17,7 +17,7 @@ public class MON_GreenSLime extends Entity {
         type = 2;
         name = "Green Slime";
         speed = 1;
-        maxLife = 4;
+        maxLife = 20;
         life = maxLife;
 
         // Solid area of the Slime
@@ -70,5 +70,10 @@ public class MON_GreenSLime extends Entity {
             actionLockCounter = 0;
         }
 
+    }
+
+    public void damageReaction() {
+        actionLockCounter = 0;
+        direction = gp.player.direction;
     }
 }
