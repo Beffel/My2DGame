@@ -8,7 +8,7 @@ public class KeyHandler implements KeyListener {
     GamePanel gp;
     public boolean upPressed, downPressed, leftPressed, rightPressed, enterPressed;
     // DEBUG
-    boolean checkDrawTime = false;
+    boolean showDebugText = false;
 
     public KeyHandler(GamePanel gp) {
         this.gp = gp;
@@ -135,12 +135,16 @@ public class KeyHandler implements KeyListener {
 
         // DEBUG
         if (code == KeyEvent.VK_T) {
-            if(!checkDrawTime) {
-                checkDrawTime = true;
+            if(!showDebugText) {
+                showDebugText = true;
             }
-            else if (checkDrawTime) {
-                checkDrawTime = false;
+            else if (showDebugText) {
+                showDebugText = false;
             }
+        }
+        if (code == KeyEvent.VK_R) {
+            // In INTELLIJ the map is updated by pressing STRG+F9
+            gp.tileM.loadMap("/maps/worldV2.txt");
         }
     }
 
