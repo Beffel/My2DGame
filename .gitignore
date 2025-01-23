@@ -7,3 +7,5 @@
 # Spezifische Dateien weiterhin ignorieren
 .idea/workspace.xml
 .idea/uiDesigner.xml
+
+out/
