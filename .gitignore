@@ -1,11 +1,11 @@
 # IntelliJ IDEA
 .idea/
-!/.idea/misc.xml
-!/.idea/modules.xml
-!/.idea/*.iml
-.idea/workspace.xml
-.idea/vcs.xml
-.idea/uiDesigner.xml
+!.idea/misc.xml
+!.idea/modules.xml
+!.idea/vcs.xml
+!.idea/*.iml
+!.idea/workspace.xml
+!.idea/uiDesigner.xml
 
 # OS-specific files
 .DS_Store
