@@ -129,6 +129,9 @@ public class KeyHandler implements KeyListener {
         if (code == KeyEvent.VK_ENTER) {
             enterPressed = true;
         }
+        if (code == KeyEvent.VK_P) {
+            gp.gameState = gp.pauseState;
+        }
 
         // DEBUG
         if (code == KeyEvent.VK_T) {
