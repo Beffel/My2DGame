@@ -1,0 +1,9 @@
+# IntelliJ IDEA
+.idea/*
+!.idea/misc.xml
+!.idea/modules.xml
+!.idea/vcs.xml
+!.idea/*.iml
+# Spezifische Dateien weiterhin ignorieren
+.idea/workspace.xml
+.idea/uiDesigner.xml
