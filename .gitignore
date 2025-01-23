@@ -1,47 +1,15 @@
-
-### IntelliJ IDEA ###
+# IntelliJ IDEA
 .idea/
-*.iml
+!/.idea/misc.xml
+!/.idea/modules.xml
+!/.idea/*.iml
+.idea/workspace.xml
+.idea/vcs.xml
+.idea/uiDesigner.xml
 
-### Build-Ausgabe ###
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Build output directories
 out/
-
-### Betriebssystemspezifisch ###
-.DS_Store        # macOS-Dateien
-Thumbs.db        # Windows-Dateien
-
-### Temporäre Dateien oder Tests ###
-
-### Java-spezifisch ###
-*.class
-*.log
-*.jar
-*.war
-*.ear
-
-### Andere Entwicklungsumgebungen (optional entfernen, falls nicht genutzt) ###
-# Eclipse
-.apt_generated
-.classpath
-.factorypath
-.project
-.settings/
-.springBeans
-.sts4-cache
-bin/
-
-# NetBeans
-/nbproject/private/
-/nbbuild/
-dist/
-nbdist/
-.nb-gradle/
-
-# VS Code
-.vscode/
-
-### Logs und temporäre Dateien ###
-*.log
-*.tmp
-*.bak
-*.swp
