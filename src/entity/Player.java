@@ -2,6 +2,7 @@ package entity;
 
 import main.GamePanel;
 import main.KeyHandler;
+import object.OBJ_Fireball;
 import object.OBJ_Key;
 import object.OBJ_Shield_Wood;
 import object.OBJ_Sword_Normal;
@@ -66,6 +67,7 @@ public class Player extends Entity {
         coin = 0;
         currentWeapon = new OBJ_Sword_Normal(gp);
         currentShield = new OBJ_Shield_Wood(gp);
+        projectile = new OBJ_Fireball(gp);
         attack = getAttack();  // the total attack value is decided by strength and weapon
         defense = getDefense(); // the total defense value is decided by dexterity and shield
     }
@@ -83,6 +85,7 @@ public class Player extends Entity {
     }
 
     public int getDefense() {
+
         return defense = dexterity * currentShield.defenseValue;
     }
 
@@ -199,6 +202,17 @@ public class Player extends Entity {
                 spriteNum = 1;
                 standCounter = 0;
             }
+        }
+
+        if (gp.keyH.shotKeyPressed && !projectile.alive) { // !projectile.alive makes it so you cant shoot more than one fireball at a time
+
+            // SET DEFAULT COORDINATES, DIRECTION AND USER
+            projectile.set(worldX, worldY, direction, true, this);
+
+            // ADD IT TO THE LIST
+            gp.projectileList.add(projectile);
+
+            gp.playSE(10);
         }
 
         // This needs to be outside of Key if Statement

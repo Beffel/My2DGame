@@ -4,15 +4,47 @@ import main.GamePanel;
 
 public class Projectile extends Entity{
 
+    Entity user;
+
     public Projectile(GamePanel gp) {
         super(gp);
     }
 
-    public void set() {
+    public void set(int worldX, int worldY, String direction, boolean alive, Entity user) {
 
+        this.worldX = worldX;
+        this.worldY = worldY;
+        this.direction = direction;
+        this.alive = alive;
+        this.user = user;
+        this.life = this.maxLife; // reset the life to the max value everytime you shoot it
     }
 
     public void update() {
 
+        switch(direction) {
+            case "up": worldY -= speed; break;
+            case "down": worldY += speed; break;
+            case "left": worldX -= speed; break;
+            case "right": worldX += speed; break;
+        }
+
+        // when you shoot the projectile it's loosing health, it's going to vanish at 0 health
+        // it has 80 life and loses 1 health per game loop, so after 80 frames it disappears
+        life--;
+        if (life <= 0) {
+            alive = false;
+        }
+
+        spriteCounter++;
+        if (spriteCounter > 12) {
+            if (spriteNum == 1) {
+                spriteNum = 2;
+            }
+            else if (spriteNum == 2) {
+                spriteNum = 1;
+            }
+            spriteCounter = 0;
+        }
     }
 }
