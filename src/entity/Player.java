@@ -30,8 +30,8 @@ public class Player extends Entity {
 
         this.keyH = keyH;
 
-        screenX = gp.screenWidth/2 - (gp.tileSize / 2); // Substract a half tile length from both screenX and screenY
-        screenY = gp.screenHeight/2 - (gp.tileSize / 2); // Substract a half tile length from both screenX and screenY
+        screenX = gp.screenWidth/2 - (gp.tileSize / 2); // Subtract a half tile length from both screenX and screenY
+        screenY = gp.screenHeight/2 - (gp.tileSize / 2); // Subtract a half tile length from both screenX and screenY
 
         // SOLID AREA
         solidArea = new Rectangle();
@@ -132,8 +132,8 @@ public class Player extends Entity {
             attacking();
         }
 
-        else if (keyH.upPressed == true || keyH.downPressed == true ||
-                keyH.leftPressed == true || keyH.rightPressed == true || keyH.enterPressed == true) {
+        else if (keyH.upPressed || keyH.downPressed ||
+                keyH.leftPressed || keyH.rightPressed || keyH.enterPressed) {
             if (keyH.upPressed) {
                 direction = "up";
 
@@ -145,15 +145,15 @@ public class Player extends Entity {
                 direction = "right";
             }
 
-            // CHECK TILE COLISSION
+            // CHECK TILE COLLISION
             collisionOn = false;
             gp.cChecker.checkTile(this);
 
-            // CHECK OBJECT COLISSION
+            // CHECK OBJECT COLLISION
             int objIndex = gp.cChecker.checkObject(this, true);
             pickUpObject(objIndex); // NOte
 
-            // CHECK NPC COLLISSION
+            // CHECK NPC COLLISION
             int npcIndex = gp.cChecker.checkEntity(this,gp.npc);
             interactNPC(npcIndex);
 
@@ -164,10 +164,8 @@ public class Player extends Entity {
             // CHECK EVENT
             gp.eHandler.checkEvent();
 
-
-
-            // IF COLISSION IS FALSE, PLAYER CAN MOVE
-            if(collisionOn == false && !keyH.enterPressed) {
+            // IF COLLISION IS FALSE, PLAYER CAN MOVE
+            if(!collisionOn && !keyH.enterPressed) {
                 switch(direction) {
                     case "up":  worldY -= speed; break;
                     case "down": worldY += speed; break;
@@ -204,13 +202,15 @@ public class Player extends Entity {
             }
         }
 
-        if (gp.keyH.shotKeyPressed && !projectile.alive) { // !projectile.alive makes it so you cant shoot more than one fireball at a time
+        if (gp.keyH.shotKeyPressed && !projectile.alive && shotAvailableCounter == 30) { // !projectile.alive makes it so you cant shoot more than one fireball at a time
 
             // SET DEFAULT COORDINATES, DIRECTION AND USER
             projectile.set(worldX, worldY, direction, true, this);
 
             // ADD IT TO THE LIST
             gp.projectileList.add(projectile);
+
+            shotAvailableCounter = 0;
 
             gp.playSE(10);
         }
@@ -223,6 +223,10 @@ public class Player extends Entity {
                 invincibleCounter = 0;
             }
         }
+
+        if (shotAvailableCounter < 30) {
+            shotAvailableCounter++;
+        }
     }
 
     public void attacking() {
@@ -234,7 +238,7 @@ public class Player extends Entity {
             spriteNum = 1;
         }
         if (spriteCounter > 5 && spriteCounter <= 25) {
-            // This shows image2 in the nextx 20 frames
+            // This shows image2 in the next 20 frames
             spriteNum = 2;
 
             // Save the current worldX, worldY, solidArea
@@ -257,7 +261,7 @@ public class Player extends Entity {
 
             // Check monster collision with the updated worldX, worldY and solidArea
             int monsterIndex = gp.cChecker.checkEntity(this, gp.monster);
-            damageMonster(monsterIndex);
+            damageMonster(monsterIndex, attack);
 
             // After checking collision, we restore the original data
             worldX = currentWorldX;
@@ -325,7 +329,7 @@ public class Player extends Entity {
         }
     }
 
-    public void damageMonster(int i) {
+    public void damageMonster(int i, int attack) {
         if (i != 999) {
             if (!gp.monster[i].invincible) {
 
