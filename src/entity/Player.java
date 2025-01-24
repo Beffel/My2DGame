@@ -2,11 +2,13 @@ package entity;
 
 import main.GamePanel;
 import main.KeyHandler;
+import object.OBJ_Key;
 import object.OBJ_Shield_Wood;
 import object.OBJ_Sword_Normal;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 
 public class Player extends Entity {
 
@@ -16,6 +18,8 @@ public class Player extends Entity {
     public final int screenY; // Final Variable so the players Screen position doesn't change
     int standCounter = 0;
     public boolean attackCanceled = false;
+    public ArrayList<Entity> inventory = new ArrayList<>();
+    public final int maxInventorySize = 20;
 
     public Player(GamePanel gp, KeyHandler keyH) {
 
@@ -42,15 +46,13 @@ public class Player extends Entity {
         setDefaultValues();
         getPlayerImage();
         getPlayerAttackImage();
+        setItems();
     }
 
     public void setDefaultValues() {
 
         worldX = gp.tileSize * 23; // Player starting point
         worldY = gp.tileSize * 21; // Player starting point
-
-//        worldX = gp.tileSize * 10;
-//        worldY = gp.tileSize * 13;
 
         speed = 4;
         direction = "down";
@@ -68,6 +70,13 @@ public class Player extends Entity {
         currentShield = new OBJ_Shield_Wood(gp);
         attack = getAttack();  // the total attack value is decided by strength and weapon
         defense = getDefense(); // the total defense value is decided by dexterity and shield
+    }
+
+    public void setItems() {
+
+        inventory.add(currentWeapon);
+        inventory.add(currentShield);
+        inventory.add(new OBJ_Key(gp));
     }
 
     public int getAttack() {

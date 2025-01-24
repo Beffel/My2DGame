@@ -16,15 +16,14 @@ public class UI {
     public boolean messageON = false;
     Font maruMonica, purisaB;
     BufferedImage heart_full, heart_half, heart_blank;
-//    public String message = "";
-//    int messageCounter = 0;
     ArrayList<String> message = new ArrayList<>();
     ArrayList<Integer> messageCounter = new ArrayList<>();
     public boolean gameFinished = false;
     public String currentDialogue = "";
     public int commandNum = 0;
     public int titleScreenState = 0; // 0: the first screen, 1: the second screen
-
+    public int slotCol = 0;
+    public int slotRow = 0;
 
     public UI(GamePanel gp) {
         this.gp = gp;
@@ -85,6 +84,7 @@ public class UI {
         // CHARACTER STATE
         if (gp.gameState == gp.characterState) {
             drawCharacterScreen();
+            drawInventory();
         }
     }
 
@@ -255,6 +255,7 @@ public class UI {
 
         g2.drawString(text, x, y);
     }
+
     public void drawDialogueScreen() {
 
         // WINDOW
@@ -274,6 +275,7 @@ public class UI {
             y += 40;
         }
     }
+
     private void drawCharacterScreen() {
 
         // CREATE A FRAME
@@ -373,6 +375,74 @@ public class UI {
 
     }
 
+    private void drawInventory() {
+
+        // CREATE A FRAME
+        final int frameX = gp.tileSize * 9;
+        final int frameY = gp.tileSize;
+        final int frameWidth = gp.tileSize * 6;
+        final int frameHeight = gp.tileSize * 5;
+        drawSubWindow(frameX, frameY, frameWidth, frameHeight);
+
+        // SLOT
+        final int slotXStart = frameX + 20;
+        final int slotYStart = frameY + 20;
+        int slotX = slotXStart;
+        int slotY = slotYStart;
+        int slotSize = gp.tileSize + 3;
+
+        // DRAW PLAYER'S ITEMS
+        for (int i = 0; i < gp.player.inventory.size(); i++) {
+
+            g2.drawImage(gp.player.inventory.get(i).down1, slotX, slotY, null);
+            slotX += slotSize;
+
+            // CHECK IF ROW IS FULL TO GO TO THE NEXT
+            if (i == 4 || i == 9 || i == 14) {
+                slotX = slotXStart;
+                slotY += slotSize;
+            }
+        }
+
+        // CURSOR
+        int cursorX = slotXStart + slotSize * slotCol;
+        int cursorY = slotYStart + slotSize * slotRow;
+        int cursorWidth = gp.tileSize;
+        int cursorHeight = gp.tileSize;
+
+        // DRAW CURSOR
+        g2.setColor(Color.white);
+        g2.setStroke(new BasicStroke(3));
+        g2.drawRoundRect(cursorX, cursorY, cursorWidth, cursorHeight, 10, 10);
+
+        // DESCRIPTION FRAME
+        int dFrameX = frameX;
+        int dFrameY = frameY + frameHeight;
+        int dFrameWidth = frameWidth;
+        int dFrameHeight = gp.tileSize * 3;
+        drawSubWindow(dFrameX, dFrameY, dFrameWidth, dFrameHeight);
+
+        // DRAW DESCRIPTION TEXT
+        int textX = dFrameX + 20;
+        int textY = dFrameY + gp.tileSize;
+        g2.setFont(g2.getFont().deriveFont(28F));
+
+        int itemIndex = getItemIndexOnSlot();
+
+        if (itemIndex < gp.player.inventory.size()) {
+
+            for (String line: gp.player.inventory.get(itemIndex).description.split("\n")) {
+                g2.drawString(line, textX, textY);
+                textY += 32;
+            }
+        }
+    }
+
+    public int getItemIndexOnSlot() {
+        int itemIndex = slotCol + (slotRow * 5);
+        return itemIndex;
+    }
+
     public void drawSubWindow (int x, int y, int width, int height) {
 
         Color c = new Color(0, 0, 0, 210); // the fourth number is for Adjusting the opacity of the new Window, basically it indicates its transparency
@@ -390,9 +460,11 @@ public class UI {
         int x = gp.screenWidth / 2 - length / 2 ;
         return x;
     }
+
     public int getXForAlignToRightText(String text, int tailX) {
         int length = (int)g2.getFontMetrics().getStringBounds(text, g2).getWidth();
         int x = tailX - length ;
         return x;
     }
+
 }

@@ -46,6 +46,7 @@ public class Entity {
     public int type; // 0 = player, 1 = npc, 2 = monster
     public String name;
     public int speed;
+
     // CHARACTER STATUS
     public int maxLife;
     public int life;
@@ -63,6 +64,7 @@ public class Entity {
     // ITEM ATTRIBUTES
     public int attackValue;
     public int defenseValue;
+    public String description = "";
 
     public Entity(GamePanel gp) {
         this.gp = gp;
