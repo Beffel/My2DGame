@@ -48,9 +48,9 @@ public class EventHandler {
             canTouchEvent = true;
         }
 
-        if (canTouchEvent == true) {
-            if (hit(27, 16, "right") == true) { damagePit(27, 16, gp.dialogueState);}
-            if (hit(23, 12, "up") == true) { healingPool(23, 12, gp.dialogueState);}
+        if (canTouchEvent) {
+            if (hit(27, 16, "right")) { damagePit(27, 16, gp.dialogueState);}
+            if (hit(23, 12, "up")) { healingPool(23, 12, gp.dialogueState);}
         }
     }
 
@@ -96,12 +96,13 @@ public class EventHandler {
 
     public void healingPool(int col, int row, int gameState) {
 
-        if (gp.keyH.enterPressed == true) {
+        if (gp.keyH.enterPressed) {
             gp.gameState = gameState;
             gp.player.attackCanceled = true;
             gp.playSE(2);
-            gp.ui.currentDialogue = "Drinking the water recovered your life.";
+            gp.ui.currentDialogue = "Drinking the water has recovered \nyour life and mana.";
             gp.player.life = gp.player.maxLife;
+            gp.player.mana = gp.player.maxMana;
             gp.aSetter.setMonster();
         }
     }

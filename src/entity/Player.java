@@ -2,10 +2,7 @@ package entity;
 
 import main.GamePanel;
 import main.KeyHandler;
-import object.OBJ_Fireball;
-import object.OBJ_Key;
-import object.OBJ_Shield_Wood;
-import object.OBJ_Sword_Normal;
+import object.*;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -60,6 +57,9 @@ public class Player extends Entity {
         level = 1;
         maxLife = 6;  // 6 life means 3 hearts
         life = maxLife; // Players current life
+        maxMana = 4;
+        mana = maxMana;
+        ammo = 10;
         strength = 1; // The more strength the player has, the more damage he deals.
         dexterity = 1; // The more dexterity the player has, the less damage he receives.
         exp = 0;
@@ -68,6 +68,7 @@ public class Player extends Entity {
         currentWeapon = new OBJ_Sword_Normal(gp);
         currentShield = new OBJ_Shield_Wood(gp);
         projectile = new OBJ_Fireball(gp);
+//        projectile = new OBJ_Rock(gp);
         attack = getAttack();  // the total attack value is decided by strength and weapon
         defense = getDefense(); // the total defense value is decided by dexterity and shield
     }
@@ -202,10 +203,14 @@ public class Player extends Entity {
             }
         }
 
-        if (gp.keyH.shotKeyPressed && !projectile.alive && shotAvailableCounter == 30) { // !projectile.alive makes it so you cant shoot more than one fireball at a time
+        if (gp.keyH.shotKeyPressed && !projectile.alive && shotAvailableCounter == 30
+         && projectile.haveResource(this)) { // !projectile.alive makes it so you cant shoot more than one fireball at a time
 
             // SET DEFAULT COORDINATES, DIRECTION AND USER
             projectile.set(worldX, worldY, direction, true, this);
+
+            // SUBTRACT THE MANA COST
+            projectile.subtractResource(this);
 
             // ADD IT TO THE LIST
             gp.projectileList.add(projectile);
@@ -363,6 +368,7 @@ public class Player extends Entity {
             level++;
             nextLevelExp = nextLevelExp * 2;
             maxLife += 2;
+            maxMana += 1;
             strength++;
             dexterity++;
             attack = getAttack();
