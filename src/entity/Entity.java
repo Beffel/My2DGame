@@ -64,6 +64,7 @@ public class Entity {
     public Projectile projectile;
 
     // ITEM ATTRIBUTES
+    public int value;
     public int attackValue;
     public int defenseValue;
     public String description = "";
@@ -78,6 +79,7 @@ public class Entity {
     public final int type_axe = 4;
     public final int type_shield = 5;
     public final int type_consumable = 6;
+    public final int type_pickupOnly = 8;
 
     public Entity(GamePanel gp) {
         this.gp = gp;
@@ -118,6 +120,23 @@ public class Entity {
 
     public void use(Entity entity) {
 
+    }
+
+    public void checkDrop() {
+
+    }
+
+    public void dropItem(Entity droppedItem) {
+
+        // SCANNING THE ARRAY, IF WE FIND A NULL SLOT WE CAN PUT A DROPPED ITEM IN THE SLOT
+        for (int i = 0; i < gp.obj.length; i++) {
+            if (gp.obj[i] == null) {
+                gp.obj[i] = droppedItem;
+                gp.obj[i].worldX = worldX; // The dead monsters worldX
+                gp.obj[i].worldY = worldY; // The dead monsters worldY
+                break; // break needed, if not the droppedItem will put an item in every empty slot
+            }
+        }
     }
 
     public void update() {
@@ -212,7 +231,7 @@ public class Entity {
             }
 
             // MONSTER HP BAR
-            if (type == 2 && hpBarOn) {
+            if (type == type_monster && hpBarOn) {
 
                 double oneScale = (double)gp.tileSize / maxLife;
                 double hpBarValue = oneScale * life;
@@ -241,8 +260,7 @@ public class Entity {
             if (dying) {
                 dyingAnimation(g2);
             }
-            g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
-
+            g2.drawImage(image, screenX, screenY, null);
             changeAlpha(g2, 1f);
         }
     }

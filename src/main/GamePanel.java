@@ -41,7 +41,7 @@ public class GamePanel extends JPanel  implements Runnable{
 
     // ENTITY AND OBJECT
     public Player player = new Player(this,keyH);
-    public Entity obj[] = new Entity[10]; // The 10 stands for 10 slots for Objects that can be DISPLAYED at the same time not created, which can be replaced later,
+    public Entity obj[] = new Entity[20]; // The 10 stands for 10 slots for Objects that can be DISPLAYED at the same time not created, which can be replaced later,
     public Entity npc[] = new Entity[10];
     public Entity monster[] = new Entity[20];
     public ArrayList<Entity> projectileList = new ArrayList<>();
@@ -121,22 +121,23 @@ public class GamePanel extends JPanel  implements Runnable{
             player.update();
 
             // NPC
-            for(int i = 0; i < npc.length; i++ ) {
+            for (int i = 0; i < npc.length; i++ ) {
                 if(npc[i] != null) {
                     npc[i].update();
                 }
             }
-            for(int i = 0; i < monster.length; i++) {
+            for (int i = 0; i < monster.length; i++) {
                 if (monster[i] != null) {
                     if (monster[i].alive && !monster[i].dying) {
                         monster[i].update();
                     }
                     if (!monster[i].alive) {
+                        monster[i].checkDrop();
                         monster[i] = null;
                     }
                 }
             }
-            for(int i = 0; i < projectileList.size(); i++) {
+            for (int i = 0; i < projectileList.size(); i++) {
                 if (projectileList.get(i) != null) {
                     if (projectileList.get(i).alive) {
                         projectileList.get(i).update();
@@ -163,7 +164,7 @@ public class GamePanel extends JPanel  implements Runnable{
             drawStart = System.nanoTime();
         }
 
-        // TITLESCREEN
+        // TITLE SCREEN
         if (gameState == titleState) {
             ui.draw(g2);
         }
