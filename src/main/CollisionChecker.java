@@ -2,10 +2,10 @@ package main;
 
 import entity.Entity;
 
-public class ColissionChecker {
+public class CollisionChecker {
     GamePanel gp;
 
-    public ColissionChecker(GamePanel gp) {
+    public CollisionChecker(GamePanel gp) {
         this.gp = gp;
     }
 
@@ -29,7 +29,7 @@ public class ColissionChecker {
                 tileNum1 = gp.tileM.mapTileNum[entityLeftCol][entityTopRow];
                 tileNum2 = gp.tileM.mapTileNum[entityRightCol][entityTopRow];
 
-                if(gp.tileM.tile[tileNum1].collision == true || gp.tileM.tile[tileNum2].collision == true) {
+                if(gp.tileM.tile[tileNum1].collision || gp.tileM.tile[tileNum2].collision) {
                     entity.collisionOn = true;
                 }
                 break;
@@ -38,7 +38,7 @@ public class ColissionChecker {
                 tileNum1 = gp.tileM.mapTileNum[entityLeftCol][entityBottomRow];
                 tileNum2 = gp.tileM.mapTileNum[entityRightCol][entityBottomRow];
 
-                if(gp.tileM.tile[tileNum1].collision == true || gp.tileM.tile[tileNum2].collision == true) {
+                if(gp.tileM.tile[tileNum1].collision || gp.tileM.tile[tileNum2].collision) {
                     entity.collisionOn = true;
                 }
                 break;
@@ -47,7 +47,7 @@ public class ColissionChecker {
                 tileNum1 = gp.tileM.mapTileNum[entityLeftCol][entityTopRow];
                 tileNum2 = gp.tileM.mapTileNum[entityLeftCol][entityBottomRow];
 
-                if(gp.tileM.tile[tileNum1].collision == true || gp.tileM.tile[tileNum2].collision == true) {
+                if(gp.tileM.tile[tileNum1].collision || gp.tileM.tile[tileNum2].collision) {
                     entity.collisionOn = true;
                 }
                 break;
@@ -56,7 +56,7 @@ public class ColissionChecker {
                 tileNum1 = gp.tileM.mapTileNum[entityRightCol][entityTopRow];
                 tileNum2 = gp.tileM.mapTileNum[entityRightCol][entityBottomRow];
 
-                if(gp.tileM.tile[tileNum1].collision == true || gp.tileM.tile[tileNum2].collision == true) {
+                if(gp.tileM.tile[tileNum1].collision || gp.tileM.tile[tileNum2].collision) {
                     entity.collisionOn = true;
                 }
                 break;
@@ -87,11 +87,11 @@ public class ColissionChecker {
                     case "right": entity.solidArea.x += entity.speed; break;
                 }
 
-                if(entity.solidArea.intersects(gp.obj[i].solidArea)) { // intersects automatically checks if the two rectangles are coliding or not
-                    if(gp.obj[i].collision == true) {
+                if(entity.solidArea.intersects(gp.obj[i].solidArea)) { // intersects automatically checks if the two rectangles are colliding or not
+                    if(gp.obj[i].collision) {
                         entity.collisionOn = true;
                     }
-                    if(player == true) {
+                    if(player) {
                         index = i;
                     }
                 }

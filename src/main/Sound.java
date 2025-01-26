@@ -23,6 +23,7 @@ public class Sound {
         soundURL[8] = getClass().getResource("/sound/levelup.wav");
         soundURL[9] = getClass().getResource("/sound/cursor.wav");
         soundURL[10] = getClass().getResource("/sound/burning.wav");
+        soundURL[11] = getClass().getResource("/sound/cuttree.wav");
     }
 
     public void setFile(int i) {
@@ -37,12 +38,10 @@ public class Sound {
 
         }
     }
-
     public void play() {
 
         clip.start();
     }
-
     public void loop() {
 
         clip.loop(Clip.LOOP_CONTINUOUSLY);
