@@ -96,8 +96,6 @@ public class UI {
 
     private void drawPlayerLife() {
 
-//        gp.player.life = 2;
-
         int x = gp.tileSize / 2;
         int y = gp.tileSize / 2;
         int i = 0;
@@ -184,8 +182,8 @@ public class UI {
         // CHECK TITLE SCREEN SUBSTATE
         if (titleScreenState == 0) {
             // Set Background color
-            g2.setColor(new Color(0, 0, 0));
-            g2.fillRect(0, 0, gp.getWidth(), gp.getHeight());
+//            g2.setColor(new Color(0, 0, 0));
+//            g2.fillRect(0, 0, gp.getWidth(), gp.getHeight());
 
             // TITLE NAME
             g2.setFont(g2.getFont().deriveFont(Font.BOLD, 96F));
@@ -235,6 +233,8 @@ public class UI {
         }
         else if (titleScreenState == 1) {
 
+            g2.setColor(new Color(0, 0, 0));
+            g2.fillRect(0, 0, gp.getWidth(), gp.getHeight());
             // CLASS SELECTION SCREEN
             g2.setColor(Color.white);
             g2.setFont(g2.getFont().deriveFont(42F));
@@ -310,7 +310,7 @@ public class UI {
     private void drawCharacterScreen() {
 
         // CREATE A FRAME
-        final int frameX = gp.tileSize / 2;
+        final int frameX = gp.tileSize * 2;
         final int frameY = gp.tileSize;
         final int frameWidth = gp.tileSize * 5;
         final int frameHeight = gp.tileSize * 10;
@@ -416,7 +416,7 @@ public class UI {
     private void drawInventory() {
 
         // CREATE A FRAME
-        final int frameX = gp.tileSize * 9;
+        final int frameX = gp.tileSize * 12;
         final int frameY = gp.tileSize;
         final int frameWidth = gp.tileSize * 6;
         final int frameHeight = gp.tileSize * 5;
