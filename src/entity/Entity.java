@@ -139,6 +139,44 @@ public class Entity {
         }
     }
 
+    public Color getParticleColor() {
+        Color color = null;
+        return color;
+    }
+
+    public int getParticleSize() {
+        int size = 0;
+        return size;
+    }
+
+    public int getParticleSpeed() {
+        int speed = 0;
+        return speed;
+    }
+
+    public int getParticleMaxLife() {
+        int maxLife = 0;
+        return maxLife;
+    }
+
+    public void generateParticle(Entity generator, Entity target) {
+
+        Color color = generator.getParticleColor();
+        int size = generator.getParticleSize();
+        int speed = generator.getParticleSpeed();
+        int maxLife = generator.getParticleMaxLife();
+
+        // in this case the xd -1 and yd -1 are for making the particle in the top left direction
+        Particle p1 = new Particle(gp, target, color, size, speed, maxLife, -2, -1);  // top left
+        Particle p2 = new Particle(gp, target, color, size, speed, maxLife, 2, -1);// top right
+        Particle p3 = new Particle(gp, target, color, size, speed, maxLife, -2, 1); // bottom left
+        Particle p4 = new Particle(gp, target, color, size, speed, maxLife, 2, 1); // bottom right
+        gp.particleList.add(p1);
+        gp.particleList.add(p2);
+        gp.particleList.add(p3);
+        gp.particleList.add(p4);
+    }
+
     public void update() {
 
         setAction();
