@@ -20,36 +20,6 @@ Schau in den `lib`-Ordner oder überprüfe deine `pom.xml` (bei Maven) bzw. `bui
 ---
 
 ## 📂 Projektstruktur
-
-
----
-
-## 🎮 Gameplay & Features
-
-### **🕹 Steuerung**
-- **W, A, S, D** – Spielerbewegung
-- **Enter** – Angriff
-- **P** – Pause
-- **C** – Inventar öffnen/schließen
-- **W, A, S, D** im Inventar – Navigation
-- **Enter** im Inventar – Gegenstand auswählen
-- **T** – Player Position & Draw Time anzeigen
-
-### **📌 Aktuelle Features**
-✅ Bewegung & Kollisionsabfrage  
-✅ Sound & Musik  
-✅ Kampfanimationen  
-✅ Health & Mana Leiste  
-✅ Mehrere Gegenstände & Inventarsystem  
-✅ Unterschiedliche Gegner & NPCs  
-
-### **🔮 Zukünftige Features (geplant)**
-⏳ Blocken mit Schild  
-⏳ Graben mit Schaufel  
-⏳ Boote für Wasserpassagen  
-
----
- ## 📂 Projektstruktur
  My2DGame/
 ├── .idea/ # IntelliJ IDEA-Projektdateien
 │   ├── misc.xml
@@ -98,6 +68,35 @@ Schau in den `lib`-Ordner oder überprüfe deine `pom.xml` (bei Maven) bzw. `bui
 ├── My2DGame.iml # IntelliJ Projektdatei
 ├── README.md # Diese Datei
 
+
+---
+
+## 🎮 Gameplay & Features
+
+### **🕹 Steuerung**
+- **W, A, S, D** – Spielerbewegung
+- **Enter** – Angriff
+- **P** – Pause
+- **C** – Inventar öffnen/schließen
+- **W, A, S, D** im Inventar – Navigation
+- **Enter** im Inventar – Gegenstand auswählen
+- **T** – Player Position & Draw Time anzeigen
+
+### **📌 Aktuelle Features**
+✅ Bewegung & Kollisionsabfrage  
+✅ Sound & Musik  
+✅ Kampfanimationen  
+✅ Health & Mana Leiste  
+✅ Mehrere Gegenstände & Inventarsystem  
+✅ Unterschiedliche Gegner & NPCs  
+
+### **🔮 Zukünftige Features (geplant)**
+⏳ Blocken mit Schild  
+⏳ Graben mit Schaufel  
+⏳ Boote für Wasserpassagen  
+
+---
+ 
 ## 📺 Screens & Game States
 Das Spiel enthält aktuell folgende Screens:
 - **Title Screen**
