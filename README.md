@@ -112,7 +112,7 @@ Das Spiel enthält aktuell folgende Screens:
 ### **2️⃣ Spiel starten**
 1. **Repository klonen:**  
    ```bash
-   git clone https://github.com/dein-username/My2DGame.git
+   git clone https://github.com/Beffel/My2DGame.git
 
 ## 🔗 Quellen & Credits
 - **Tutorial von RyiSnow:** [YouTube-Kanal](https://www.youtube.com/c/RyiSnow)  
