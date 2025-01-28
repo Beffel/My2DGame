@@ -14,9 +14,6 @@
 - **Sound:** Java Sound API
 - **Externe Bibliotheken/APIs:** (Noch nicht überprüft – Falls vorhanden, bitte ergänzen)
 
-ℹ️ **So findest du heraus, ob du externe Bibliotheken verwendest:**  
-Schau in den `lib`-Ordner oder überprüfe deine `pom.xml` (bei Maven) bzw. `build.gradle` (bei Gradle). Alternativ kannst du in deinem Code nach `import`-Befehlen suchen, die nicht zum Standard-Java gehören.
-
 ---
 
 ## 📂 Projektstruktur
