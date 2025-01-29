@@ -29,6 +29,8 @@ public class Main {
         gamePanel.setupGame();
 
         gamePanel.startGameThread();
+        // In INTELLIJ the map is updated by pressing STRG+F9 and R ingame
+
 
     }
 }

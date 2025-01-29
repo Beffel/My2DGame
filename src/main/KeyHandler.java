@@ -159,7 +159,10 @@ public class KeyHandler implements KeyListener {
         }
         if (code == KeyEvent.VK_R) {
             // In INTELLIJ the map is updated by pressing STRG+F9
-            gp.tileM.loadMap("/maps/worldV2.txt");
+            switch(gp.currentMap) {
+                case 0:gp.tileM.loadMap("/maps/worldV3.txt", 0); break;
+                case 1:gp.tileM.loadMap("/maps/interior01.txt", 1); break;
+            }
         }
     }
 
@@ -285,6 +288,7 @@ public class KeyHandler implements KeyListener {
             if (gp.ui.commandNum == 0) {
                 gp.gameState = gp.playState;
                 gp.retry();
+                gp.playMusic(0);
             }
             else if (gp.ui.commandNum == 1) {
                 gp.ui.titleScreenState = 0;

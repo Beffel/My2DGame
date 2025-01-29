@@ -49,6 +49,9 @@ public class Player extends Entity {
 
         worldX = gp.tileSize * 23; // Player starting point
         worldY = gp.tileSize * 21; // Player starting point
+        //
+//        worldX = gp.tileSize * 12; // Player starting point
+//        worldY = gp.tileSize * 13; // Player starting point
 
         speed = 4;
         direction = "down";
@@ -88,6 +91,7 @@ public class Player extends Entity {
         invincible = false;
 
     }
+
     public void setItems() {
 
         inventory.clear();
@@ -259,6 +263,8 @@ public class Player extends Entity {
         }
         if (life <= 0) {
             gp.gameState = gp.gameOverState;
+            gp.ui.commandNum = -1;
+            gp.stopMusic();
             gp.playSE(12);
         }
     }
@@ -323,25 +329,25 @@ public class Player extends Entity {
         if (i != 999) {  // if the index is not 999 then the player has touched an object, if it is 999 the player hasn't touched an object
 
             // PICKUP ONLY ITEMS
-            if (gp.obj[i].type == type_pickupOnly) {
+            if (gp.obj[gp.currentMap][i].type == type_pickupOnly) {  // FIXED
 
-                gp.obj[i].use(this);  // if the item is a pickup only item we immediately call this method and then delete it from the map in the next line
-                gp.obj[i] = null;
+                gp.obj[gp.currentMap][i].use(this);  // if the item is a pickup only item we immediately call this method and then delete it from the map in the next line  // FIXED
+                gp.obj[gp.currentMap][i] = null;  // FIXED
             }
             else {
                 // INVENTORY ITEMS
                 String text;
 
                 if (inventory.size() != maxInventorySize) {
-                    inventory.add(gp.obj[i]);
+                    inventory.add(gp.obj[gp.currentMap][i]);  // FIXED
                     gp.playSE(1);
-                    text = "Got a " + gp.obj[i].name + "!";
+                    text = "Got a " + gp.obj[gp.currentMap][i].name + "!";  // FIXED
                 }
                 else {
                     text = "You cannot carry any more items!";
                 }
                 gp.ui.addMessage(text);
-                gp.obj[i] = null;
+                gp.obj[gp.currentMap][i] = null;  // FIXED
             }
         }
     }
@@ -353,7 +359,7 @@ public class Player extends Entity {
             if (i != 999) {  // if the index is not 999 then the player has touched an NPC, if it is 999 the player hasn't touched an NPC
                 attackCanceled = true;
                 gp.gameState = gp.dialogueState;
-                gp.npc[i].speak();
+                gp.npc[gp.currentMap][i].speak(); // FIXED
             }
 
         }
@@ -363,10 +369,10 @@ public class Player extends Entity {
 
         if (i != 999) {
 
-            if (!invincible && !gp.monster[i].dying) {
+            if (!invincible && !gp.monster[gp.currentMap][i].dying) { // FIXED
                 gp.playSE(6);
 
-                int damage = gp.monster[i].attack - defense;
+                int damage = gp.monster[gp.currentMap][i].attack - defense; // FIXED
                 if (damage < 0) {
                     damage = 0;
                 }
@@ -379,26 +385,26 @@ public class Player extends Entity {
 
     public void damageMonster(int i, int attack) {
         if (i != 999) {
-            if (!gp.monster[i].invincible) {
+            if (!gp.monster[gp.currentMap][i].invincible) { // FIXED
 
                 gp.playSE(5);
 
-                int damage = attack - gp.monster[i].defense;
+                int damage = attack - gp.monster[gp.currentMap][i].defense; // FIXED
                 if (damage < 0) {
                     damage = 0;
                 }
 
-                gp.monster[i].life -= damage;
+                gp.monster[gp.currentMap][i].life -= damage; // FIXED
                 gp.ui.addMessage(damage + " damage!");
 
-                gp.monster[i].invincible = true;
-                gp.monster[i].damageReaction();
+                gp.monster[gp.currentMap][i].invincible = true; // FIXED
+                gp.monster[gp.currentMap][i].damageReaction(); // FIXED
 
-                if (gp.monster[i].life <= 0) {
-                    gp.monster[i].dying = true;
-                    gp.ui.addMessage("Killed the " + gp.monster[i].name + "!");
-                    gp.ui.addMessage("Exp " + gp.monster[i].exp);
-                    exp += gp.monster[i].exp;
+                if (gp.monster[gp.currentMap][i].life <= 0) {  // FIXED
+                    gp.monster[gp.currentMap][i].dying = true;  // FIXED
+                    gp.ui.addMessage("Killed the " + gp.monster[gp.currentMap][i].name + "!");  // FIXED
+                    gp.ui.addMessage("Exp " + gp.monster[gp.currentMap][i].exp);  // FIXED
+                    exp += gp.monster[gp.currentMap][i].exp;  // FIXED
                     checkLevelUp();
                 }
             }
@@ -407,17 +413,17 @@ public class Player extends Entity {
 
     public void damageInteractiveTile(int i) {
 
-        if (i != 999 && gp.iTile[i].destructible &&
-                gp.iTile[i].isCorrectItem(this) && !gp.iTile[i].invincible) { //&& !gp.iTile[i].invincible
+        if (i != 999 && gp.iTile[gp.currentMap][i].destructible &&  // FIXED
+                gp.iTile[gp.currentMap][i].isCorrectItem(this) && !gp.iTile[gp.currentMap][i].invincible) {  // FIXED
 
-            gp.iTile[i].playSE();
-            gp.iTile[i].life--;
-            gp.iTile[i].invincible = true;
+            gp.iTile[gp.currentMap][i].playSE();   // FIXED
+            gp.iTile[gp.currentMap][i].life--;  // FIXED
+            gp.iTile[gp.currentMap][i].invincible = true;  // FIXED
 
-            generateParticle(gp.iTile[i], gp.iTile[i]);
+            generateParticle(gp.iTile[gp.currentMap][i], gp.iTile[gp.currentMap][i]);  // FIXED
 
-            if (gp.iTile[i].life == 0) {
-                gp.iTile[i] = gp.iTile[i].getDestroyedForm();
+            if (gp.iTile[gp.currentMap][i].life == 0) {  // FIXED
+                gp.iTile[gp.currentMap][i] = gp.iTile[gp.currentMap][i].getDestroyedForm(); // FIXED
             }
         }
     }

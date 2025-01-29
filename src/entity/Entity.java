@@ -129,11 +129,11 @@ public class Entity {
     public void dropItem(Entity droppedItem) {
 
         // SCANNING THE ARRAY, IF WE FIND A NULL SLOT WE CAN PUT A DROPPED ITEM IN THE SLOT
-        for (int i = 0; i < gp.obj.length; i++) {
-            if (gp.obj[i] == null) {
-                gp.obj[i] = droppedItem;
-                gp.obj[i].worldX = worldX; // The dead monsters worldX
-                gp.obj[i].worldY = worldY; // The dead monsters worldY
+        for (int i = 0; i < gp.obj[1].length; i++) {
+            if (gp.obj[gp.currentMap][i] == null) {
+                gp.obj[gp.currentMap][i] = droppedItem;
+                gp.obj[gp.currentMap][i].worldX = worldX; // The dead monsters worldX
+                gp.obj[gp.currentMap][i].worldY = worldY; // The dead monsters worldY
                 break; // break needed, if not the droppedItem will put an item in every empty slot
             }
         }

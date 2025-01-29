@@ -531,8 +531,6 @@ public class UI {
         if (commandNum == 1) {
             g2.drawString(">", x - 40, y);
         }
-
-
     }
 
     public void drawOptionScreen() {
