@@ -17,54 +17,53 @@
 ---
 
 ## 📂 Projektstruktur
- My2DGame/
+My2DGame/
 ├── .idea/ # IntelliJ IDEA-Projektdateien
-│   ├── misc.xml
-│   ├── modules.xml
-│   ├── uiDesigner.xml
-│   ├── vcs.xml
-│   ├── workspace.xml
+│ ├── misc.xml
+│ ├── modules.xml
+│ ├── uiDesigner.xml
+│ ├── vcs.xml
+│ ├── workspace.xml
 ├── out/ # Kompilierte Dateien (sollte ignoriert werden)
 ├── res/ # Ressourcen wie Fonts, Maps, Sounds, etc.
-│   ├── font/
-│   ├── maps/
-│   ├── monster/
-│   ├── npc/
-│   ├── objects/
-│   ├── player/
-│   ├── projectile/
-│   ├── sound/
-│   ├── tiles/
-│   ├── tiles_interactive/
+│ ├── font/
+│ ├── maps/
+│ ├── monster/
+│ ├── npc/
+│ ├── objects/
+│ ├── player/
+│ ├── projectile/
+│ ├── sound/
+│ ├── tiles/
+│ ├── tiles_interactive/
 ├── src/ # Quellcode des Spiels
-│   ├── entity/ # Spieler, NPCs, Gegner, Projektile
-│   │   ├── Entity.java
-│   │   ├── NPC_OldMan.java
-│   │   ├── Particle.java
-│   │   ├── Player.java
-│   │   ├── Projectile.java
-│   ├── main/ # Kernklassen (Game Loop, UI, Events)
-│   │   ├── AssetSetter.java
-│   │   ├── CollisionChecker.java
-│   │   ├── EventHandler.java
-│   │   ├── EventRect.java
-│   │   ├── GamePanel.java
-│   │   ├── KeyHandler.java
-│   │   ├── Main.java
-│   │   ├── Sound.java
-│   │   ├── UI.java
-│   │   ├── UtilityTool.java
-│   ├── tile_interactive/ # Interaktive Objekte (z. B. Bäume, Hindernisse)
-│   │   ├── InteractiveTile.java
-│   │   ├── IT_DryTree.java
-│   │   ├── IT_Trunk.java
-│   ├── tiles/ # Tile-Management
-│   │   ├── Tile.java
-│   │   ├── TileManager.java
+│ ├── entity/ # Spieler, NPCs, Gegner, Projektile
+│ │ ├── Entity.java
+│ │ ├── NPC_OldMan.java
+│ │ ├── Particle.java
+│ │ ├── Player.java
+│ │ ├── Projectile.java
+│ ├── main/ # Kernklassen (Game Loop, UI, Events)
+│ │ ├── AssetSetter.java
+│ │ ├── CollisionChecker.java
+│ │ ├── EventHandler.java
+│ │ ├── EventRect.java
+│ │ ├── GamePanel.java
+│ │ ├── KeyHandler.java
+│ │ ├── Main.java
+│ │ ├── Sound.java
+│ │ ├── UI.java
+│ │ ├── UtilityTool.java
+│ ├── tile_interactive/ # Interaktive Objekte (z. B. Bäume, Hindernisse)
+│ │ ├── InteractiveTile.java
+│ │ ├── IT_DryTree.java
+│ │ ├── IT_Trunk.java
+│ ├── tiles/ # Tile-Management
+│ │ ├── Tile.java
+│ │ ├── TileManager.java
 ├── .gitignore # Dateien, die nicht getrackt werden sollen
 ├── My2DGame.iml # IntelliJ Projektdatei
 ├── README.md # Diese Datei
-
 
 ---
 
