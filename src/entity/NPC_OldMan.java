@@ -43,10 +43,6 @@ public class NPC_OldMan extends Entity {
         dialogues[1] = "So you've come to this island for \nit's treasure?";
         dialogues[2] = "I used to be a Wizard but now... \nI'm a bit too old for adventures.";
         dialogues[3] = "Farewell and good luck, Traveler!";
-//        dialogues[0] = "OK krass";
-//        dialogues[1] = "OK krass, OK krass, OK krass, \nOK krass, OK krass";
-//        dialogues[2] = "OK krass, OK krass, OK krass, \nOK krass, OK krass, \nOK krass, OK krass, OK krass, \nOK krass, OK krass";
-//        dialogues[3] = "OK krass, OK krass, OK krass, \nOK krass, OK krass, \nOK krass, OK krass, OK krass, \nOK krass, OK krass, OK krass";
     }
 
     // this method sets the Characters movement behavior

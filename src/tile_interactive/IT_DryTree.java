@@ -18,7 +18,7 @@ public class IT_DryTree extends InteractiveTile {
 
         down1 = setup("/tiles_interactive/drytree", gp.tileSize, gp.tileSize);
         destructible = true;
-        life = 3;
+        life = 2;
     }
 
     public boolean isCorrectItem(Entity entity) {
