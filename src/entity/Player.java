@@ -47,12 +47,13 @@ public class Player extends Entity {
 
         worldX = gp.tileSize * 23; // Player starting point
         worldY = gp.tileSize * 21; // Player starting point
-        //
+
 //        worldX = gp.tileSize * 12; // Player starting point
 //        worldY = gp.tileSize * 12; // Player starting point
 //        gp.currentMap = 1;
 
-        speed = 4;
+        defaultSpeed = 4;
+        speed = defaultSpeed;
         direction = "down";
 
         // PLAYER STATUS
@@ -234,8 +235,14 @@ public class Player extends Entity {
             // SUBTRACT THE MANA COST
             projectile.subtractResource(this);
 
-            // ADD IT TO THE LIST
-            gp.projectileList.add(projectile);
+            // CHECK VACANCY
+            // with this loop we check which slot is vacant and put the projectile to the empty slot
+            for (int i = 0; i < gp.projectile[1].length; i++) {
+                if (gp.projectile[gp.currentMap][i] == null) {
+                    gp.projectile[gp.currentMap][i] = projectile;
+                    break;
+                }
+            }
 
             shotAvailableCounter = 0;
 
@@ -302,10 +309,13 @@ public class Player extends Entity {
 
             // Check monster collision with the updated worldX, worldY and solidArea
             int monsterIndex = gp.cChecker.checkEntity(this, gp.monster);
-            damageMonster(monsterIndex, attack);
+            damageMonster(monsterIndex, attack, currentWeapon.knockBackPower);
 
             int iTileIndex = gp.cChecker.checkEntity(this, gp.iTile);
             damageInteractiveTile(iTileIndex);
+
+            int projectileIndex = gp.cChecker.checkEntity(this, gp.projectile);
+            damageProjectile(projectileIndex);
 
             // After checking collision, we restore the original data
             worldX = currentWorldX;
@@ -382,11 +392,15 @@ public class Player extends Entity {
         }
     }
 
-    public void damageMonster(int i, int attack) {
+    public void damageMonster(int i, int attack, int knockBackPower) {
         if (i != 999) {
             if (!gp.monster[gp.currentMap][i].invincible) { // FIXED
 
                 gp.playSE(5);
+
+                if (knockBackPower > 0) {
+                    knockBack(gp.monster[gp.currentMap][i], knockBackPower);
+                }
 
                 int damage = attack - gp.monster[gp.currentMap][i].defense; // FIXED
                 if (damage < 0) {
@@ -410,6 +424,13 @@ public class Player extends Entity {
         }
     }
 
+    public void knockBack(Entity entity, int knockBackPower) {
+
+        entity.direction = direction;
+        entity.speed += knockBackPower;
+        entity.knockBack = true;
+    }
+
     public void damageInteractiveTile(int i) {
 
         if (i != 999 && gp.iTile[gp.currentMap][i].destructible &&  // FIXED
@@ -424,6 +445,15 @@ public class Player extends Entity {
             if (gp.iTile[gp.currentMap][i].life == 0) {  // FIXED
                 gp.iTile[gp.currentMap][i] = gp.iTile[gp.currentMap][i].getDestroyedForm(); // FIXED
             }
+        }
+    }
+
+    public void damageProjectile(int i) {
+
+        if (i != 999) {
+            Entity projectile = gp.projectile[gp.currentMap][i];
+            projectile.alive = false;
+            generateParticle(projectile, projectile);
         }
     }
 
