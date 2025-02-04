@@ -35,6 +35,7 @@ public class OBJ_Rock extends Projectile {
         right1 = setup("/projectile/rock_down_1", gp.tileSize, gp.tileSize);
         right2 = setup("/projectile/rock_down_1", gp.tileSize, gp.tileSize);
     }
+
     public boolean haveResource(Entity user) {
 
         boolean haveResource = false;

@@ -48,9 +48,9 @@ public class Player extends Entity {
         worldX = gp.tileSize * 23; // Player starting point
         worldY = gp.tileSize * 21; // Player starting point
         //
-        worldX = gp.tileSize * 12; // Player starting point
-        worldY = gp.tileSize * 12; // Player starting point
-        gp.currentMap = 1;
+//        worldX = gp.tileSize * 12; // Player starting point
+//        worldY = gp.tileSize * 12; // Player starting point
+//        gp.currentMap = 1;
 
         speed = 4;
         direction = "down";

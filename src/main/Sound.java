@@ -48,18 +48,22 @@ public class Sound {
         } catch(Exception e) {
         }
     }
+
     public void play() {
 
         clip.start();
     }
+
     public void loop() {
 
         clip.loop(Clip.LOOP_CONTINUOUSLY);
     }
+
     public void stop() {
 
         clip.stop();
     }
+
     public void checkVolume() {
 
         switch(volumeScale) {

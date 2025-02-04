@@ -52,45 +52,81 @@ public class MON_GreenSLime extends Entity {
         right2 = setup("/monster/greenslime_down_2", gp.tileSize, gp.tileSize);
     }
 
+    public void update() {
+
+        super.update();
+
+        int xDistance = Math.abs(worldX - gp.player.worldX);
+        int yDistance = Math.abs(worldY - gp.player.worldY);
+        int tileDistance = (xDistance + yDistance) / gp.tileSize;
+
+        if (!onPath && tileDistance < 5) {
+
+            // Randomized slime aggro when getting to close, about 50%
+            int i = new Random().nextInt(100) + 1;
+            if (i > 50) {
+                onPath = true;
+            }
+        }
+        // when the player is more than 20 tiles away, the slime looses aggro
+        if (onPath && tileDistance > 20) {
+            onPath = false;
+        }
+    }
+
     public void setAction() {
 
-        actionLockCounter++;
+        if (onPath) {
 
-        if (actionLockCounter == 120) {
 
-            // If the Subclass has the same method, it takes the priority, in this case this is the same method like in the Entity class.
-            Random random = new Random();
-            int i = random.nextInt(100) + 1; // pick up a number from 1 to 100
+            // NPC Goal is the Player position
+            int goalCol = (gp.player.worldX + gp.player.solidArea.x) / gp.tileSize;
+            int goalRow = (gp.player.worldY + gp.player.solidArea.y) / gp.tileSize;
 
-            // The npc has a 1/4 chance to go up, down, right or left
-            if (i <= 25) {
-                direction = "up";
-            }
-            if (i > 25 && i <= 50) {
-                direction = "down";
-            }
-            if (i > 50 && i <= 75) {
-                direction = "left";
-            }
-            if (i > 75 && i <= 100) {
-                direction = "right";
-            }
-            actionLockCounter = 0;
+            searchPath(goalCol, goalRow);
 
+            // if the number hits 100 the slime will shoot a projectile
+            int i = new Random().nextInt(200) + 1;
+            if (i > 197 && !projectile.alive && shotAvailableCounter == 30) {
+                projectile.set(worldX, worldY, direction, true, this);
+                gp.projectileList.add(projectile);
+                shotAvailableCounter = 0;
+            }
+        }
+        else {
+            actionLockCounter++;
+
+
+            if (actionLockCounter == 120) {
+
+                // If the Subclass has the same method, it takes the priority, in this case this is the same method like in the Entity class.
+                Random random = new Random();
+                int i = random.nextInt(100) + 1; // pick up a number from 1 to 100
+
+                // The npc has a 1/4 chance to go up, down, right or left
+                if (i <= 25) {
+                    direction = "up";
+                }
+                if (i > 25 && i <= 50) {
+                    direction = "down";
+                }
+                if (i > 50 && i <= 75) {
+                    direction = "left";
+                }
+                if (i > 75 && i <= 100) {
+                    direction = "right";
+                }
+                actionLockCounter = 0;
+            }
         }
 
-        // if the number hits 100 the slime will shoot a projectile
-        int i = new Random().nextInt(100) + 1;
-        if (i > 99 && !projectile.alive && shotAvailableCounter == 30) {
-            projectile.set(worldX, worldY, direction, true, this);
-            gp.projectileList.add(projectile);
-            shotAvailableCounter = 0;
-        }
+
     }
 
     public void damageReaction() {
         actionLockCounter = 0;
-        direction = gp.player.direction;
+//        direction = gp.player.direction;
+        onPath = true;
     }
 
     public void checkDrop() {
