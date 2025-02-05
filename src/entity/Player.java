@@ -44,13 +44,13 @@ public class Player extends Entity {
     }
 
     public void setDefaultValues() {
+//
+//        worldX = gp.tileSize * 23; // Player starting point
+//        worldY = gp.tileSize * 21; // Player starting point
 
-        worldX = gp.tileSize * 23; // Player starting point
-        worldY = gp.tileSize * 21; // Player starting point
-
-//        worldX = gp.tileSize * 12; // Player starting point
-//        worldY = gp.tileSize * 12; // Player starting point
-//        gp.currentMap = 1;
+        worldX = gp.tileSize * 12; // Player starting point
+        worldY = gp.tileSize * 12; // Player starting point
+        gp.currentMap = 1;
 
         defaultSpeed = 4;
         speed = defaultSpeed;
@@ -353,8 +353,7 @@ public class Player extends Entity {
                 // INVENTORY ITEMS
                 String text;
 
-                if (inventory.size() != maxInventorySize) {
-                    inventory.add(gp.obj[gp.currentMap][i]);  // FIXED
+                if (canObtainItem(gp.obj[gp.currentMap][i])) {
                     gp.playSE(1);
                     text = "Got a " + gp.obj[gp.currentMap][i].name + "!";  // FIXED
                 }
@@ -503,10 +502,61 @@ public class Player extends Entity {
             }
             if (selectedItem.type == type_consumable) {
                 if (selectedItem.use(this)){
-                    inventory.remove(itemIndex);
+                    if (selectedItem.amount > 1) {
+                        selectedItem.amount--;
+                    }
+                    else {
+                        inventory.remove(itemIndex);
+                    }
                 }
             }
         }
+    }
+
+    public int searchItemInInventory(String itemName) {
+        // this method can be used to check if the player has a certain quest item etc.
+
+        int itemIndex = 999;
+
+        for (int i = 0; i < inventory.size(); i++) {
+            if (inventory.get(i).name.equals(itemName)) {
+                itemIndex = i;
+                break;
+            }
+        }
+        return itemIndex;
+    }
+
+    public boolean canObtainItem(Entity item) {
+        // we check if we can obtain the items via various conditions because we have items that are stackable and items that are not stackable
+        // if an item is not stackable it is going to be put in an empty inventory slot, if it is stackable it should go to the same spot
+        // if an item is stackable but the inventory is full you can still pick it up which needs to be checked here.
+
+        boolean canObtain = false;
+
+        // CHECK IF STACKABLE
+        if (item.stackable) {
+
+            int index = searchItemInInventory(item.name);
+
+            if (index != 999) {
+                inventory.get(index).amount++;
+                canObtain = true;
+            }
+            else {  // new item so need to check vacancy
+                if (inventory.size() != maxInventorySize) {
+                    inventory.add(item);
+                    canObtain = true;
+                }
+            }
+        }
+        else { // not stackable so check vacancy
+            if (inventory.size() != maxInventorySize) {
+                inventory.add(item);
+                canObtain = true;
+            }
+        }
+        return canObtain;
     }
 
     @Override
