@@ -19,7 +19,7 @@ public class OBJ_Potion_Red extends Entity{
         price = 5;
     }
 
-    public void use(Entity entity) {
+    public boolean use(Entity entity) {
 
         gp.gameState = gp.dialogueState;
         gp.ui.currentDialogue = value + " health have been recovered by \ndrinking the " + name + ".";
@@ -27,5 +27,6 @@ public class OBJ_Potion_Red extends Entity{
         entity.life += value;
 
         gp.playSE(2);
+        return true;
     }
 }
