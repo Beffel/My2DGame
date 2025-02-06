@@ -5,10 +5,10 @@ import main.GamePanel;
 import java.awt.*;
 
 public class EnvironmentManager {
-    // This class will handle every environmental mechanic such as Lighting, Rain, Fog etc.
+    // This class will handle every environmental mechanic such as lighting, Rain, Fog etc.
 
     GamePanel gp;
-    Lighting Lighting;
+    public Lighting lighting;
 
     public EnvironmentManager(GamePanel gp) {
         this.gp = gp;
@@ -17,15 +17,15 @@ public class EnvironmentManager {
 
     public void setup() {
 
-        Lighting = new Lighting(gp); // The number shouldn't be lager than the screen width or screen height
+        lighting = new Lighting(gp); // The number shouldn't be lager than the screen width or screen height
     }
 
     public void update() {
-        Lighting.update();
+        lighting.update();
     }
 
     public void draw(Graphics2D g2) {
 
-        Lighting.draw(g2);
+        lighting.draw(g2);
     }
 }

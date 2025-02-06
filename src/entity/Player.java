@@ -123,6 +123,17 @@ public class Player extends Entity {
         right2 = setup("/player/boy_right_2", gp.tileSize, gp.tileSize);
     }
 
+    public void getSleepingImage(BufferedImage image) {
+        up1 = image;
+        up2 = image;
+        down1 = image;
+        down2 = image;
+        left1 = image;
+        left2 = image;
+        right1 = image;
+        right2 = image;
+    }
+
     public void getPlayerAttackImage() {
 
         if (currentWeapon.type == type_sword) {
