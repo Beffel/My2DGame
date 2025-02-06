@@ -17,7 +17,11 @@ public class EnvironmentManager {
 
     public void setup() {
 
-        Lighting = new Lighting(gp, 500); // The number shouldn't be lager than the screen width or screen height
+        Lighting = new Lighting(gp); // The number shouldn't be lager than the screen width or screen height
+    }
+
+    public void update() {
+        Lighting.update();
     }
 
     public void draw(Graphics2D g2) {
