@@ -54,7 +54,7 @@ public class MON_GreenSLime extends Entity {
     }
 
     public void setAction() {
-        
+
         if (onPath) {
 
             // Check if it stops chasing
@@ -64,7 +64,7 @@ public class MON_GreenSLime extends Entity {
             searchPath(getGoalCol(gp.player), getGoalRow(gp.player));
 
             // Check if it shoots a projectile
-            checkShootOrNot(200, 40);
+            checkShootOrNot(200, 30);
         }
         else {
             // check if it starts chasing
