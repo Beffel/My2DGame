@@ -45,6 +45,7 @@ public class Map extends TileManager{
                     row++;
                 }
             }
+            g2.dispose();
         }
     }
 
@@ -72,7 +73,6 @@ public class Map extends TileManager{
         g2.setFont(gp.ui.maruMonica.deriveFont(32F));
         g2.setColor(Color.white);
         g2.drawString("Press M to close", 750, 550);
-
     }
 
     public void drawMiniMap(Graphics2D g2) {
