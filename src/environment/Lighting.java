@@ -100,7 +100,7 @@ public class Lighting {
 
             dayCounter++;
 
-            if (dayCounter > 7200) { // 36000 is 10 minutes, 18000 is 5 minutes, 600 is 10 seconds
+            if (dayCounter > 10800) { // 36000 is 10 minutes, 18000 is 5 minutes, 600 is 10 seconds
                 dayState = dusk;
                 dayCounter = 0;
             }
