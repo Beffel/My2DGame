@@ -44,6 +44,9 @@ public class Entity {
     public boolean guarding = false;
     public boolean transparent = false;
     public boolean offBalance = false;
+    public Entity loot;
+    public boolean opened = false;
+
 
     // Counter
     public int spriteCounter = 0;
@@ -159,6 +162,9 @@ public class Entity {
     public int getGoalRow(Entity target) {
         int goalRow = (target.worldY + target.solidArea.y) / gp.tileSize;
         return goalRow;
+    }
+
+    public void setLoot(Entity loot) {
     }
 
     public void setAction() {
@@ -793,10 +799,10 @@ public class Entity {
 
         // if an object is adjacent to the user it gets detected
         switch ( user.direction) {
-            case "up": nextWorldY = user.getTopY() - 1; break;
-            case "down": nextWorldY = user.getBottomY() + 1; break;
-            case "left": nextWorldX = user.getLeftX() - 1; break;
-            case "right": nextWorldX = user.getRightX() + 1; break;
+            case "up": nextWorldY = user.getTopY() - gp.player.speed; break;
+            case "down": nextWorldY = user.getBottomY() + gp.player.speed; break;
+            case "left": nextWorldX = user.getLeftX() - gp.player.speed; break;
+            case "right": nextWorldX = user.getRightX() + gp.player.speed; break;
         }
         int col = nextWorldX / gp.tileSize;
         int row = nextWorldY / gp.tileSize;
