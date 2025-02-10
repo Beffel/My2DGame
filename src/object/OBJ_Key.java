@@ -8,6 +8,7 @@ public class OBJ_Key extends Entity {
     GamePanel gp;
 
     public OBJ_Key(GamePanel gp) {
+
         super(gp);
         this.gp = gp;
 

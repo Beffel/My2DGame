@@ -38,7 +38,6 @@ public class PathFinder {
 
     public void resetNodes() {
 
-
         int col = 0;
         int row = 0;
 
@@ -110,6 +109,7 @@ public class PathFinder {
             }
         }
     }
+
     public void getCost(Node node) {
 
         // G Cost
@@ -125,6 +125,7 @@ public class PathFinder {
         // F Cost
         node.fCost = node.gCost + node.hCost;
     }
+
     public boolean search(){
         while (!goalReached && step < 500){
             int col = currentNode.col;

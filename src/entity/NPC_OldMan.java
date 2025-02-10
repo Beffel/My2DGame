@@ -39,10 +39,16 @@ public class NPC_OldMan extends Entity {
 
     public void setDialogue() {
 
-        dialogues[0] = "Hello Traveler!";
-        dialogues[1] = "So you've come to this island for \nit's treasure?";
-        dialogues[2] = "I used to be a Wizard but now... \nI'm a bit too old for adventures.";
-        dialogues[3] = "Farewell and good luck, Traveler!";
+        dialogues[0][0] = "Hello Traveler!";
+        dialogues[0][1] = "So you've come to this island for \nit's treasure?";
+        dialogues[0][2] = "I used to be a Wizard but now... \nI'm a bit too old for adventures.";
+        dialogues[0][3] = "Farewell and good luck, Traveler!";
+
+        dialogues[1][0] = "If you become tired, rest at the water.";
+        dialogues[1][1] = "However, the monsters reappear if you rest.\nI don't recall the reason for that.";
+        dialogues[1][2] = "Don't forget to rest.";
+
+        dialogues[2][0] = "I wonder how to open that door...";
     }
 
     // this method sets the Characters movement behavior
@@ -85,15 +91,15 @@ public class NPC_OldMan extends Entity {
                 actionLockCounter = 0;
             }
         }
-
-
     }
 
     public void speak() {
 
         // Character Specific stuff
-        super.speak();
-        onPath = true;
+        facePlayer();
+        startDialogue(this, dialogueSet);
+
+//        onPath = true;
     }
 }
 

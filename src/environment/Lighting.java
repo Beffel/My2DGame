@@ -25,8 +25,6 @@ public class Lighting {
     public Lighting(GamePanel gp) {
         this.gp = gp;
         setLightSource();
-
-
     }
 
     public void setLightSource() {

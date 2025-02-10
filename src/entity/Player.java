@@ -78,6 +78,7 @@ public class Player extends Entity {
         getAttackImage();
         getGuardImage();
         setItems();
+        setDialogue();
     }
 
     public void setDefaultPositions() {
@@ -85,6 +86,12 @@ public class Player extends Entity {
         worldX = gp.tileSize * 23;
         worldY = gp.tileSize * 21;
         direction = "down";
+
+    }
+
+    public void setDialogue() {
+
+        dialogues[0][0] = "You are level " +  level + "now!\n" + "you got stronger!";
 
     }
 
@@ -99,7 +106,6 @@ public class Player extends Entity {
         knockBack = false;
         lightUpdated = true;
         speed = defaultSpeed;
-
     }
 
     public void setItems() {
@@ -224,7 +230,7 @@ public class Player extends Entity {
                 }
             }
             knockBackCounter++;
-            if (knockBackCounter == 10) {  // the higher this number, the more the knockback increases
+            if (knockBackCounter == 10) {  // the higher this number, the more the knock back increases
                 knockBackCounter = 0;
                 knockBack = false;
                 speed = defaultSpeed;
@@ -400,14 +406,12 @@ public class Player extends Entity {
 
     public void interactNPC(int i) {
 
-        if (gp.keyH.enterPressed) {
+        if (i != 999) { // if the index is not 999 then the player has touched an NPC, if it is 999 the player hasn't touched an NPC
 
-            if (i != 999) {  // if the index is not 999 then the player has touched an NPC, if it is 999 the player hasn't touched an NPC
+            if (gp.keyH.enterPressed) {
                 attackCanceled = true;
-                gp.gameState = gp.dialogueState;
                 gp.npc[gp.currentMap][i].speak(); // FIXED
             }
-
         }
     }
 
@@ -507,7 +511,8 @@ public class Player extends Entity {
 
             gp.playSE(8);
             gp.gameState = gp.dialogueState;
-            gp.ui.currentDialogue = "You are level " +  level + "now!\n" + "you got stronger!";
+
+            startDialogue(this, 0);
 
         }
     }
