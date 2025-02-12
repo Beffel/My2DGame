@@ -21,6 +21,8 @@ public class NPC_OldMan extends Entity {
         solidArea.width = 32;
         solidArea.height = 32;
 
+        dialogueSet = -1;
+
         getImage();
         setDialogue();
     }
@@ -98,6 +100,13 @@ public class NPC_OldMan extends Entity {
         // Character Specific stuff
         facePlayer();
         startDialogue(this, dialogueSet);
+
+        dialogueSet++;
+
+        if (dialogues[dialogueSet][0] == null) {
+            dialogueSet = 0;
+//            dialogueSet--; // with the decrement the npc will repeat the last sentence every time we talk to him
+        }
 
 //        onPath = true;
     }

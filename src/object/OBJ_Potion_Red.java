@@ -20,13 +20,17 @@ public class OBJ_Potion_Red extends Entity{
         stackable = true;
     }
 
+    public void setDialogue() {
+
+        dialogues[0][0] = value + " health have been recovered by \ndrinking the " + name + ".";
+
+    }
+
     public boolean use(Entity entity) {
 
-        gp.gameState = gp.dialogueState;
-        gp.ui.currentDialogue = value + " health have been recovered by \ndrinking the " + name + ".";
 
+        startDialogue(this, 0);
         entity.life += value;
-
         gp.playSE(2);
         return true;
     }

@@ -91,7 +91,7 @@ public class Player extends Entity {
 
     public void setDialogue() {
 
-        dialogues[0][0] = "You are level " +  level + "now!\n" + "you got stronger!";
+        dialogues[0][0] = "You are level " +  level + " now!\n" + "you got stronger!";
 
     }
 
@@ -202,7 +202,6 @@ public class Player extends Entity {
         guardDown = setup("/player/guarding sprites/boy_guard_down", gp.tileSize, gp.tileSize);
         guardLeft = setup("/player/guarding sprites/boy_guard_left", gp.tileSize, gp.tileSize);
         guardRight = setup("/player/guarding sprites/boy_guard_right", gp.tileSize, gp.tileSize);
-
 
     }
 
@@ -510,8 +509,8 @@ public class Player extends Entity {
             defense = getDefense();
 
             gp.playSE(8);
-            gp.gameState = gp.dialogueState;
-
+//            gp.gameState = gp.dialogueState;
+            setDialogue();
             startDialogue(this, 0);
 
         }

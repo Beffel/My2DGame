@@ -32,10 +32,12 @@ public class UI {
     int subState = 0;
     int counter = 0;
     public Entity npc;
+    int charIndex = 0;
+    String combinedText = "";
+
 
     public UI(GamePanel gp) {
         this.gp = gp;
-
         try {
             InputStream is = getClass().getResourceAsStream("/font/x12y16pxMaruMonica.ttf");
             maruMonica = Font.createFont(Font.TRUETYPE_FONT, is);
@@ -328,9 +330,22 @@ public class UI {
 
         if (npc.dialogues[npc.dialogueSet][npc.dialogueIndex] != null) {
 
-            currentDialogue = npc.dialogues[npc.dialogueSet][npc.dialogueIndex];
+//            currentDialogue = npc.dialogues[npc.dialogueSet][npc.dialogueIndex];
+
+            char characters[] = npc.dialogues[npc.dialogueSet][npc.dialogueIndex].toCharArray();
+
+            if (charIndex < characters.length) {
+                // In every loop one character is added to the combinedText variable
+                gp.playSE(17);
+                String s = String.valueOf(characters[charIndex]);
+                combinedText = combinedText + s;
+                currentDialogue = combinedText;
+                charIndex++;
+            }
 
             if (gp.keyH.enterPressed && gp.gameState == gp.dialogueState) {
+                charIndex = 0;
+                combinedText = "";
                 npc.dialogueIndex++;
                 gp.keyH.enterPressed = false;
 //                if (gp.gameState == gp.dialogueState) {
@@ -878,6 +893,7 @@ public class UI {
 
     public void trade_select() {
 
+        npc.dialogueSet = 0;
         drawDialogueScreen();
 
         // DRAW WINDOW
@@ -913,8 +929,7 @@ public class UI {
             g2.drawString(">", x - 25, y);
             if (gp.keyH.enterPressed) {
                 commandNum = 0;
-                gp.gameState = gp.dialogueState;
-                currentDialogue = "Farewell!";
+                npc.startDialogue(npc, 1);
             }
         }
     }
@@ -954,7 +969,7 @@ public class UI {
             g2.drawImage(coin, x + 10, y + 8, 32, 32, null);
 
             int price = npc.inventory.get(itemIndex).price;
-            String text = ""+ price;
+            String text = "" + price;
             x = getXForAlignToRightText(text, gp.tileSize * 8 - 20);
             g2.drawString(text, x, y + 34);
 
@@ -962,9 +977,10 @@ public class UI {
             if (gp.keyH.enterPressed) {
                 if (npc.inventory.get(itemIndex).price > gp.player.coin) {
                     subState = 0;
-                    gp.gameState = gp.dialogueState;
-                    currentDialogue = "You need more Coin for this item!";
-                    drawDialogueScreen();
+
+
+                    npc.startDialogue(npc, 2);
+//                    drawDialogueScreen();
                 }
                 else {
                     if (gp.player.canObtainItem(npc.inventory.get(itemIndex))) {
@@ -972,9 +988,7 @@ public class UI {
                     }
                     else {
                         subState = 0;
-                        gp.gameState = gp.dialogueState;
-                        currentDialogue = "Your inventory is already full!";
-//                        drawDialogueScreen();
+                        npc.startDialogue(npc, 3);
                     }
                 }
             }
@@ -1030,8 +1044,7 @@ public class UI {
                 gp.player.inventory.get(itemIndex) == gp.player.currentShield) {
                     commandNum = 0;
                     subState = 0;
-                    gp.gameState = gp.dialogueState;
-                    currentDialogue = "You can't sell your equipped items!";
+                    npc.startDialogue(npc, 4);
                 }
                 else {
                     if (gp.player.inventory.get(itemIndex).amount > 1){
