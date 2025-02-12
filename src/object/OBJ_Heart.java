@@ -6,13 +6,14 @@ import main.GamePanel;
 public class OBJ_Heart extends Entity {
 
     GamePanel gp;
+    public static final String objName = "Heart";
 
     public OBJ_Heart(GamePanel gp) {
         super(gp);
         this.gp = gp;
 
         type = type_pickupOnly;
-        name = "Heart";
+        name = objName;
         value = 1;
         down1 = setup("/objects/heart_full", (int)(gp.tileSize / 1.5), (int)(gp.tileSize / 1.5));
         image = setup("/objects/heart_full", gp.tileSize, gp.tileSize);

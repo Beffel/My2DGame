@@ -330,7 +330,7 @@ public class UI {
 
         if (npc.dialogues[npc.dialogueSet][npc.dialogueIndex] != null) {
 
-//            currentDialogue = npc.dialogues[npc.dialogueSet][npc.dialogueIndex];
+            currentDialogue = npc.dialogues[npc.dialogueSet][npc.dialogueIndex];
 
             char characters[] = npc.dialogues[npc.dialogueSet][npc.dialogueIndex].toCharArray();
 
@@ -977,10 +977,7 @@ public class UI {
             if (gp.keyH.enterPressed) {
                 if (npc.inventory.get(itemIndex).price > gp.player.coin) {
                     subState = 0;
-
-
                     npc.startDialogue(npc, 2);
-//                    drawDialogueScreen();
                 }
                 else {
                     if (gp.player.canObtainItem(npc.inventory.get(itemIndex))) {

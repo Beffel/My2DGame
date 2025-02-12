@@ -43,13 +43,13 @@ public class Player extends Entity {
     }
 
     public void setDefaultValues() {
-//
-        worldX = gp.tileSize * 23; // Player starting point
-        worldY = gp.tileSize * 21; // Player starting point
 
-//        worldX = gp.tileSize * 12; // Player starting point
-//        worldY = gp.tileSize * 12; // Player starting point
-//        gp.currentMap = 1;
+//        worldX = gp.tileSize * 23; // Player starting point
+//        worldY = gp.tileSize * 21; // Player starting point
+
+        worldX = gp.tileSize * 12; // Player starting point
+        worldY = gp.tileSize * 12; // Player starting point
+        gp.currentMap = 1;
 
         defaultSpeed = 4;
         speed = defaultSpeed;
@@ -579,10 +579,12 @@ public class Player extends Entity {
 
         boolean canObtain = false;
 
-        // CHECK IF STACKABLE
-        if (item.stackable) {
+        Entity newItem = gp.eGenerator.getObject(item.name);
 
-            int index = searchItemInInventory(item.name);
+        // CHECK IF STACKABLE
+        if (newItem.stackable) {
+
+            int index = searchItemInInventory(newItem.name);
 
             if (index != 999) {
                 inventory.get(index).amount++;
@@ -590,14 +592,14 @@ public class Player extends Entity {
             }
             else {  // new item so need to check vacancy
                 if (inventory.size() != maxInventorySize) {
-                    inventory.add(item);
+                    inventory.add(newItem);
                     canObtain = true;
                 }
             }
         }
         else { // not stackable so check vacancy
             if (inventory.size() != maxInventorySize) {
-                inventory.add(item);
+                inventory.add(newItem);
                 canObtain = true;
             }
         }
