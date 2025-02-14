@@ -13,26 +13,28 @@ public class EntityGenerator {
 
     public Entity getObject(String itemName) {
 
-        Entity obj = null;
+        Entity obj = switch (itemName) {
+            case OBJ_Axe.objName -> new OBJ_Axe(gp);
+            case OBJ_Boots.objName -> new OBJ_Boots(gp);
+            case OBJ_Coin_Bronze.objName -> new OBJ_Coin_Bronze(gp);
+            case OBJ_Heart.objName -> new OBJ_Heart(gp);
+            case OBJ_Key.objName -> new OBJ_Key(gp);
+            case OBJ_Lantern.objName -> new OBJ_Lantern(gp);
+            case OBJ_Potion_Red.objName -> new OBJ_Potion_Red(gp);
+            case OBJ_Shield_Blue.objName -> new OBJ_Shield_Blue(gp);
+            case OBJ_Shield_Wood.objName -> new OBJ_Shield_Wood(gp);
+            case OBJ_Sword_Normal.objName -> new OBJ_Sword_Normal(gp);
+            case OBJ_Tent.objName -> new OBJ_Tent(gp);
+            case OBJ_Door.objName -> new OBJ_Door(gp);
+            case OBJ_Chest.objName -> new OBJ_Chest(gp);
+            case OBJ_ManaCrystal.objName -> new OBJ_ManaCrystal(gp);
+            case OBJ_Fireball.objName -> new OBJ_Fireball(gp);
+            case OBJ_Rock.objName -> new OBJ_Rock(gp);
+            case OBJ_Pickaxe.objName -> new OBJ_Pickaxe(gp);
+            case OBJ_Door_Iron.objName -> new OBJ_Door_Iron(gp);
+            default -> null;
+        };
 
-        switch (itemName) {
-            case OBJ_Axe.objName: obj = new OBJ_Axe(gp); break;
-            case OBJ_Boots.objName: obj = new OBJ_Boots(gp); break;
-            case OBJ_Coin_Bronze.objName: obj = new OBJ_Coin_Bronze(gp); break;
-            case OBJ_Heart.objName: obj = new OBJ_Heart(gp); break;
-            case OBJ_Key.objName: obj = new OBJ_Key(gp); break;
-            case OBJ_Lantern.objName: obj = new OBJ_Lantern(gp); break;
-            case OBJ_Potion_Red.objName: obj = new OBJ_Potion_Red(gp); break;
-            case OBJ_Shield_Blue.objName: obj = new OBJ_Shield_Blue(gp); break;
-            case OBJ_Shield_Wood.objName: obj = new OBJ_Shield_Wood(gp); break;
-            case OBJ_Sword_Normal.objName: obj = new OBJ_Sword_Normal(gp); break;
-            case OBJ_Tent.objName: obj = new OBJ_Tent(gp); break;
-            case OBJ_Door.objName: obj = new OBJ_Door(gp); break;
-            case OBJ_Chest.objName: obj = new OBJ_Chest(gp); break;
-            case OBJ_ManaCrystal.objName: obj = new OBJ_ManaCrystal(gp); break;
-            case OBJ_Fireball.objName: obj = new OBJ_Fireball(gp); break;
-            case OBJ_Rock.objName: obj = new OBJ_Rock(gp); break;
-        }
         return obj;
     }
 }
