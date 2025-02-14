@@ -103,14 +103,14 @@ public class Lighting {
 
             dayCounter++;
 
-            if (dayCounter > 10800) { // 36000 is 10 minutes, 18000 is 5 minutes, 600 is 10 seconds
+            if (dayCounter > 3600) { // 36000 is 10 minutes, 18000 is 5 minutes, 600 is 10 seconds
                 dayState = dusk;
                 dayCounter = 0;
             }
         }
         if (dayState == dusk) {
 
-            filterAlpha += 0.001f;  // 0.0001f x 10000 = 1f, 10000/60 = 166 seconds transitioning time
+            filterAlpha += 0.0005f;  // 0.0001f x 10000 = 1f, 10000/60 = 166 seconds transitioning time
 
             if (filterAlpha > 1f) {
                 filterAlpha = 1f;
@@ -139,8 +139,13 @@ public class Lighting {
 
     public void draw(Graphics2D g2) {
 
-        g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, filterAlpha));
-        g2.drawImage(darknessFilter, 0, 0, null);
+        if (gp.currentArea == gp.outside) {
+            g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, filterAlpha));
+        }
+        if (gp.currentArea == gp.outside || gp.currentArea == gp.dungeon) {
+            g2.drawImage(darknessFilter, 0, 0, null);
+        }
+
         g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
 
         // DEBUG
@@ -155,6 +160,5 @@ public class Lighting {
         g2.setColor(Color.white);
         g2.setFont(g2.getFont().deriveFont(50f));
         g2.drawString(situation, 800, 500);
-
     }
 }

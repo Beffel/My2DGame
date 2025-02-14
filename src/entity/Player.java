@@ -44,12 +44,14 @@ public class Player extends Entity {
 
     public void setDefaultValues() {
 
-//        worldX = gp.tileSize * 23; // Player starting point
-//        worldY = gp.tileSize * 21; // Player starting point
+        worldX = gp.tileSize * 23; // Player starting point
+        worldY = gp.tileSize * 21; // Player starting point
+//        worldX = gp.tileSize * 13; // Player starting point
+//        worldY = gp.tileSize * 11; // Player starting point
 
-        worldX = gp.tileSize * 12; // Player starting point
-        worldY = gp.tileSize * 12; // Player starting point
-        gp.currentMap = 1;
+//        worldX = gp.tileSize * 12; // Player starting point
+//        worldY = gp.tileSize * 12; // Player starting point
+//        gp.currentMap = 1;
 
         defaultSpeed = 4;
         speed = defaultSpeed;
@@ -150,14 +152,14 @@ public class Player extends Entity {
 
     public void getImage() {
 
-        up1 = setup("/player/boy_up_1", gp.tileSize, gp.tileSize);
-        up2 = setup("/player/boy_up_2", gp.tileSize, gp.tileSize);
-        down1 = setup("/player/boy_down_1", gp.tileSize, gp.tileSize);
-        down2 = setup("/player/boy_down_2", gp.tileSize, gp.tileSize);
-        left1 = setup("/player/boy_left_1", gp.tileSize, gp.tileSize);
-        left2 = setup("/player/boy_left_2", gp.tileSize, gp.tileSize);
-        right1 = setup("/player/boy_right_1", gp.tileSize, gp.tileSize);
-        right2 = setup("/player/boy_right_2", gp.tileSize, gp.tileSize);
+        up1 = setup("/player/moving sprites/boy_up_1", gp.tileSize, gp.tileSize);
+        up2 = setup("/player/moving sprites/boy_up_2", gp.tileSize, gp.tileSize);
+        down1 = setup("/player/moving sprites/boy_down_1", gp.tileSize, gp.tileSize);
+        down2 = setup("/player/moving sprites/boy_down_2", gp.tileSize, gp.tileSize);
+        left1 = setup("/player/moving sprites/boy_left_1", gp.tileSize, gp.tileSize);
+        left2 = setup("/player/moving sprites/boy_left_2", gp.tileSize, gp.tileSize);
+        right1 = setup("/player/moving sprites/boy_right_1", gp.tileSize, gp.tileSize);
+        right2 = setup("/player/moving sprites/boy_right_2", gp.tileSize, gp.tileSize);
     }
 
     public void getSleepingImage(BufferedImage image) {

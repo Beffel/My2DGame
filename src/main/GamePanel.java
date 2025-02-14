@@ -29,9 +29,9 @@ public class GamePanel extends JPanel  implements Runnable{
     public final int screenHeight = tileSize * maxScreenRow; // 576 pixels
 
     // World Settings
-    public final int maxWorldCol = 50;
-    public final int maxWorldRow = 50;
-    public final int maxMap = 10;
+    public int maxWorldCol;
+    public int maxWorldRow;
+    public final int maxMap = 80;
     public int currentMap = 0;
 
     // For Full Screen
@@ -63,9 +63,9 @@ public class GamePanel extends JPanel  implements Runnable{
 
     // ENTITY AND OBJECT
     public Player player = new Player(this,keyH);
-    public Entity obj[][] = new Entity[maxMap][20]; // The 10 stands for 10 slots for Objects that can be DISPLAYED at the same time not created, which can be replaced later,
-    public Entity npc[][] = new Entity[maxMap][10];
-    public Entity monster[][] = new Entity[maxMap][20];
+    public Entity obj[][] = new Entity[maxMap][30]; // The 10 stands for 10 slots for Objects that can be DISPLAYED at the same time not created, which can be replaced later,
+    public Entity npc[][] = new Entity[maxMap][10]; // changed from 10 to 80
+    public Entity monster[][] = new Entity[maxMap][30];
     public InteractiveTile iTile[][] = new InteractiveTile[maxMap][50];
     public Entity projectile[][] = new Entity[maxMap][20];
 //    public ArrayList<Entity> projectileList = new ArrayList<>();
@@ -86,6 +86,13 @@ public class GamePanel extends JPanel  implements Runnable{
     public final int sleepState = 9;
     public final int mapState = 10;
 
+    // AREA
+    public int currentArea;
+    public int nextArea;
+    public final int outside = 50;
+    public final int indoor = 51;
+    public final int dungeon = 52;
+
 
     public GamePanel() {
 
@@ -102,8 +109,10 @@ public class GamePanel extends JPanel  implements Runnable{
         aSetter.setNPC();
         aSetter.setMonster();
         aSetter.setInteractiveTile();
-        gameState = titleState;
         eManager.setup();
+
+        gameState = titleState;
+        currentArea = outside;
 
         tempScreen = new BufferedImage(screenWidth, screenHeight, BufferedImage.TYPE_INT_ARGB);
         g2 = (Graphics2D)tempScreen.getGraphics();
@@ -373,5 +382,23 @@ public class GamePanel extends JPanel  implements Runnable{
 
         se.setFile(i);
         se.play();
+    }
+
+    public void changeArea() {
+
+        if (nextArea != currentArea) {
+            stopMusic();
+
+            if (nextArea == outside) {
+                playMusic(0);
+            } else if (nextArea == indoor) {
+                playMusic(18);
+            } else if (nextArea == dungeon) {
+                playMusic(19);
+            }
+        }
+        currentArea = nextArea;
+
+        aSetter.setMonster();
     }
 }
