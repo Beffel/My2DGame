@@ -71,7 +71,7 @@ public class MON_GreenSLime extends Entity {
             checkStartChasingOrNot(gp.player, 5, 100);
 
             // get a random direction
-            getRandomDirection();
+            getRandomDirection(120);
         }
     }
 

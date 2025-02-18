@@ -74,6 +74,13 @@ public class CollisionChecker {
 
         int index = 999;
 
+        // Use a temporal direction when it's being knocked back
+        String direction = entity.direction;
+
+        if (entity.knockBack) {
+            direction = entity.knockBackDirection;
+        }
+
         for (int i = 0; i < gp.obj[1].length; i++) {  // FIXED
 
             if (gp.obj[gp.currentMap][i] != null) {  // FIXED
@@ -87,7 +94,7 @@ public class CollisionChecker {
                 gp.obj[gp.currentMap][i].solidArea.y = gp.obj[gp.currentMap][i].worldY + gp.obj[gp.currentMap][i].solidArea.y;  // FIXED
 
                 // Simulating entity's movement and check where it will be after it moved
-                switch(entity.direction) {
+                switch(direction) {
                     case "up": entity.solidArea.y -= entity.speed; break;
                     case "down": entity.solidArea.y += entity.speed; break;
                     case "left": entity.solidArea.x -= entity.speed; break;
