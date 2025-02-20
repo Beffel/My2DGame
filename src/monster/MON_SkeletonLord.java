@@ -17,7 +17,9 @@ public class MON_SkeletonLord extends Entity {
 
         super(gp);
         this.gp = gp;
+
         type = type_monster;
+        boss = true;
         name = monName;
         defaultSpeed = 1;
         speed = defaultSpeed;

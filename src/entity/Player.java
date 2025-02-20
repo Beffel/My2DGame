@@ -52,9 +52,9 @@ public class Player extends Entity {
 //        worldX = gp.tileSize * 12; // Player starting point
 //        worldY = gp.tileSize * 12; // Player starting point
 //        gp.currentMap = 1;
-        worldX = gp.tileSize * 35; // Player starting point
-        worldY = gp.tileSize * 40; // Player starting point
-        gp.currentMap = 2;
+        worldX = gp.tileSize * 25; // Player starting point
+        worldY = gp.tileSize * 39; // Player starting point
+        gp.currentMap = 3;
 
         defaultSpeed = 4;
         speed = defaultSpeed;
