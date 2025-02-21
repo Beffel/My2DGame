@@ -409,16 +409,14 @@ public class UI {
                 charIndex++;
             }
 
-            if (gp.keyH.enterPressed && gp.gameState == gp.dialogueState) {
+            if (gp.keyH.enterPressed) {
                 charIndex = 0;
                 combinedText = "";
-                npc.dialogueIndex++;
-                gp.keyH.enterPressed = false;
-//                if (gp.gameState == gp.dialogueState) {
-//
-//                    npc.dialogueIndex++;
-//                    gp.keyH.enterPressed = false;
-//                }
+                if (gp.gameState == gp.dialogueState || gp.gameState == gp.cutsceneState) {
+
+                    npc.dialogueIndex++;
+                    gp.keyH.enterPressed = false;
+                }
             }
         }
         else { // If no text is in the array
@@ -426,6 +424,9 @@ public class UI {
 
             if (gp.gameState == gp.dialogueState) {
                 gp.gameState = gp.playState;
+            }
+            if (gp.gameState == gp.cutsceneState) {
+                gp.csManager.scenePhase++;
             }
         }
 

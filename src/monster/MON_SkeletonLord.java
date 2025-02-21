@@ -1,8 +1,10 @@
 package monster;
 
+import data.Progress;
 import entity.Entity;
 import main.GamePanel;
 import object.OBJ_Coin_Bronze;
+import object.OBJ_Door_Iron;
 import object.OBJ_Heart;
 import object.OBJ_ManaCrystal;
 
@@ -29,6 +31,7 @@ public class MON_SkeletonLord extends Entity {
         defense = 2;
         exp = 50;
         knockBackPower = 5;
+        sleep = true;
 
 
         // Solid area of the SkeletonLord
@@ -46,6 +49,7 @@ public class MON_SkeletonLord extends Entity {
 
         getImage();
         getAttackImage();
+        setDialogue();
     }
 
     public void getImage() {
@@ -105,6 +109,13 @@ public class MON_SkeletonLord extends Entity {
 
     }
 
+    public void setDialogue() {
+
+        dialogues[0][0] = "You can not defeat me!";
+        dialogues[0][1] = "You will die!";
+        dialogues[0][2] = "DOOM!";
+    }
+
     public void setAction() {
 
         if (!inRage && life < maxLife / 2) {
@@ -136,6 +147,20 @@ public class MON_SkeletonLord extends Entity {
 
     public void checkDrop() {
 
+        gp.bossBattleOn = false;
+        Progress.skeletonLordDefeated = true;
+
+        // Restore the previous music
+        gp.stopMusic();
+        gp.playMusic(19);
+
+        // Remove the iron doors
+        for (int i = 0; i < gp.obj[1].length; i++) {
+            if (gp.obj[gp.currentMap][i] != null && gp.obj[gp.currentMap][i].name.equals(OBJ_Door_Iron.objName)) {
+                gp.playSE(21);
+                gp.obj[gp.currentMap][i] = null;
+            }
+        }
         // CAST A DIE?
         int i = new Random().nextInt(100) + 1;
 
