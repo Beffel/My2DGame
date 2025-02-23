@@ -44,17 +44,17 @@ public class Player extends Entity {
 
     public void setDefaultValues() {
 
-//        worldX = gp.tileSize * 23; // Player starting point
-//        worldY = gp.tileSize * 21; // Player starting point
+        worldX = gp.tileSize * 23; // Player starting point
+        worldY = gp.tileSize * 21; // Player starting point
 //        worldX = gp.tileSize * 13; // Player starting point
 //        worldY = gp.tileSize * 11; // Player starting point
 
 //        worldX = gp.tileSize * 12; // Player starting point
 //        worldY = gp.tileSize * 12; // Player starting point
 //        gp.currentMap = 1;
-        worldX = gp.tileSize * 25; // Player starting point
-        worldY = gp.tileSize * 39; // Player starting point
-        gp.currentMap = 3;
+//        worldX = gp.tileSize * 25; // Player starting point
+//        worldY = gp.tileSize * 39; // Player starting point
+//        gp.currentMap = 3;
 
         defaultSpeed = 4;
         speed = defaultSpeed;
